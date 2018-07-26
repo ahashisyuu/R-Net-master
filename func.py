@@ -1,4 +1,5 @@
 import tensorflow as tf
+from tensorflow.contrib.cudnn_rnn.python.layers.cudnn_rnn import CudnnGRU
 
 INF = 1e30
 
@@ -12,7 +13,6 @@ class cudnn_gru:
         self.dropout_mask = []
         for layer in range(num_layers):
             input_size_ = input_size if layer == 0 else 2 * num_units
-            tf.nn.dynamic_rnn
             gru_fw = tf.contrib.cudnn_rnn.CudnnGRU(1, num_units)
             gru_bw = tf.contrib.cudnn_rnn.CudnnGRU(1, num_units)
             init_fw = tf.tile(tf.Variable(

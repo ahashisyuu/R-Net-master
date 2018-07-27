@@ -118,7 +118,7 @@ class Model(object):
         with tf.variable_scope("predict"):
             outer = tf.matmul(tf.expand_dims(tf.nn.softmax(logits1), axis=2),
                               tf.expand_dims(tf.nn.softmax(logits2), axis=1))
-            outer = tf.matrix_band_part(outer, 0, 15)  # 取上3角15条对角线，表示答案最大长度只能取到15个单词
+            outer = tf.matrix_band_part(outer, 0, 15)  # 取上3角15条对角线，表示答案最大长度只能取到15+1个单词
             self.yp1 = tf.argmax(tf.reduce_max(outer, axis=2), axis=1)  # 寻找最大值在L1轴的索引
             self.yp2 = tf.argmax(tf.reduce_max(outer, axis=1), axis=1)  # 寻找最大值在L2轴的索引
             losses = tf.nn.softmax_cross_entropy_with_logits_v2(

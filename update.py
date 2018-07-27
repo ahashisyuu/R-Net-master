@@ -1,6 +1,6 @@
-import pip
+from pip._internal import get_installed_distributions
 from subprocess import call
-for package in pip.get_installed_distributions():
+for package in get_installed_distributions():
    call('pip install --upgrade' + package.project_name)
 
 # 作者：小德子
